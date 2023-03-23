@@ -1,1 +1,523 @@
-[]
+[
+    {
+        "id": "f960541ec3785b06",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f5ccacf9f7517396",
+        "type": "inject",
+        "z": "f960541ec3785b06",
+        "name": "increment",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "increment",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 200,
+        "wires": [
+            [
+                "48b9af44a9142246"
+            ]
+        ]
+    },
+    {
+        "id": "189515b0e5c392a5",
+        "type": "inject",
+        "z": "f960541ec3785b06",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "reset",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 140,
+        "y": 260,
+        "wires": [
+            [
+                "48b9af44a9142246"
+            ]
+        ]
+    },
+    {
+        "id": "0718744c585926b2",
+        "type": "inject",
+        "z": "f960541ec3785b06",
+        "name": "decrement",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "decrement",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 340,
+        "wires": [
+            [
+                "48b9af44a9142246"
+            ]
+        ]
+    },
+    {
+        "id": "48b9af44a9142246",
+        "type": "function",
+        "z": "f960541ec3785b06",
+        "name": "function 1",
+        "func": "var increase ; \nvar decrease ; \n\n\n\nif(msg.topic==\"reset\")\n{\n    context.set('counter', msg.payload) || 10 ;\n    return msg ;\n}\n\nif ( msg.topic ==\"increment\")\n{\n    if (context.get('counter')==20)\n\n{\n    context.set('counter', 20 ); \nmsg.payload= 20 ; \nreturn msg ; \n}\nelse {\n     increase = context.get('counter') ||9;\n increase = increase +1 ; \n context.set('counter', increase );\n msg.payload = increase ;\n return msg ;  \n}\n}\n    else if  (msg.topic == \"decrement\") {\n    if (context.get('counter') == 10) {\n            context.set('counter', 10)\n            msg.payload = 10;\n            return msg;\n        }\n        else {\n            decrease = context.get('counter') || 0;\n            decrease = decrease - 1;\n            context.set('counter', decrease);\n            msg.payload = decrease;\n            return msg ; \n        }\n    }\n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 280,
+        "wires": [
+            [
+                "8e2ccf0a24f98430"
+            ]
+        ]
+    },
+    {
+        "id": "8e2ccf0a24f98430",
+        "type": "debug",
+        "z": "f960541ec3785b06",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "0d40af551a6ba6fd",
+        "type": "comment",
+        "z": "f960541ec3785b06",
+        "name": "task 1 ",
+        "info": "",
+        "x": 530,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "fc566f9df88c33e9",
+        "type": "comment",
+        "z": "f960541ec3785b06",
+        "name": "task 2 ",
+        "info": "",
+        "x": 530,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "b24363e6d767c77a",
+        "type": "inject",
+        "z": "f960541ec3785b06",
+        "name": "set a ",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 420,
+        "wires": [
+            [
+                "698f1c0d8f63fc5b"
+            ]
+        ]
+    },
+    {
+        "id": "402263367fb35882",
+        "type": "inject",
+        "z": "f960541ec3785b06",
+        "name": "set b",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 500,
+        "wires": [
+            [
+                "f795510a166ed115"
+            ]
+        ]
+    },
+    {
+        "id": "b8e309f063251585",
+        "type": "inject",
+        "z": "f960541ec3785b06",
+        "name": "set c ",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 580,
+        "wires": [
+            [
+                "78bca5015fadd6d8"
+            ]
+        ]
+    },
+    {
+        "id": "698f1c0d8f63fc5b",
+        "type": "random",
+        "z": "f960541ec3785b06",
+        "name": "",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 440,
+        "y": 420,
+        "wires": [
+            [
+                "186d421e4764f543"
+            ]
+        ]
+    },
+    {
+        "id": "f795510a166ed115",
+        "type": "random",
+        "z": "f960541ec3785b06",
+        "name": "",
+        "low": "20",
+        "high": "30",
+        "inte": "true",
+        "property": "payload",
+        "x": 440,
+        "y": 500,
+        "wires": [
+            [
+                "c62398c96d0c4820"
+            ]
+        ]
+    },
+    {
+        "id": "78bca5015fadd6d8",
+        "type": "random",
+        "z": "f960541ec3785b06",
+        "name": "",
+        "low": 1,
+        "high": "5",
+        "inte": "true",
+        "property": "payload",
+        "x": 440,
+        "y": 580,
+        "wires": [
+            [
+                "d052f06397bb8307"
+            ]
+        ]
+    },
+    {
+        "id": "5a1d6b1fc557c050",
+        "type": "debug",
+        "z": "f960541ec3785b06",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "bfaf924ce3ead475",
+        "type": "debug",
+        "z": "f960541ec3785b06",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "4e0ece93dd108d49",
+        "type": "debug",
+        "z": "f960541ec3785b06",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "239fad185f88a6d3",
+        "type": "inject",
+        "z": "f960541ec3785b06",
+        "name": "solve x ",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 310,
+        "y": 680,
+        "wires": [
+            [
+                "8f08b8038f0a1d74"
+            ]
+        ]
+    },
+    {
+        "id": "cf4922a5d440573f",
+        "type": "inject",
+        "z": "f960541ec3785b06",
+        "name": "solve y",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 270,
+        "y": 760,
+        "wires": [
+            [
+                "4b27918374073a18"
+            ]
+        ]
+    },
+    {
+        "id": "8f08b8038f0a1d74",
+        "type": "function",
+        "z": "f960541ec3785b06",
+        "name": "function 2",
+        "func": "var A =global.get('a');\nvar B = global.get('b');\nvar C = global.get('c'); \n\nmsg.payload = A + 2*B + 3*C ; \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 680,
+        "wires": [
+            [
+                "5729dc0114ba3178"
+            ]
+        ]
+    },
+    {
+        "id": "4b27918374073a18",
+        "type": "function",
+        "z": "f960541ec3785b06",
+        "name": "function 3",
+        "func": "var A = global.get('a');\nvar B = global.get('b');\nvar C = global.get('c');\n\nmsg.payload = 3*A + 2 * B - 3 * C;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 760,
+        "wires": [
+            [
+                "d74979343a708177"
+            ]
+        ]
+    },
+    {
+        "id": "5729dc0114ba3178",
+        "type": "debug",
+        "z": "f960541ec3785b06",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "d74979343a708177",
+        "type": "debug",
+        "z": "f960541ec3785b06",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "186d421e4764f543",
+        "type": "function",
+        "z": "f960541ec3785b06",
+        "name": "function 4",
+        "func": "global.set('a', msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 440,
+        "wires": [
+            [
+                "5a1d6b1fc557c050"
+            ]
+        ]
+    },
+    {
+        "id": "c62398c96d0c4820",
+        "type": "function",
+        "z": "f960541ec3785b06",
+        "name": "function 5",
+        "func": "global.set('b', msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 500,
+        "wires": [
+            [
+                "bfaf924ce3ead475"
+            ]
+        ]
+    },
+    {
+        "id": "d052f06397bb8307",
+        "type": "function",
+        "z": "f960541ec3785b06",
+        "name": "function 6",
+        "func": "global.set('c', msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 580,
+        "wires": [
+            [
+                "4e0ece93dd108d49"
+            ]
+        ]
+    }
+]
